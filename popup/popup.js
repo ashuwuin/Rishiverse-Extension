@@ -80,8 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
       tabBtnMenu.classList.add('active');
       tabBtnMenu.setAttribute('aria-selected', 'true');
       tabMenu.classList.add('active');
+      const now = new Date();
+      const currentDayIndex = (now.getDay() + 6) % 7;
+      todayDayName = WEEKDAYS[currentDayIndex];
+      selectedDay = todayDayName;
       const isOfficial = Boolean(currentMenuSource && currentMenuSource.startsWith('rishiverse'));
-      if (!currentMenuData || !isOfficial) initMessMenu();
+      if (!currentMenuData || !isOfficial) {
+        initMessMenu();
+      } else {
+        renderSelectedDayMenu();
+      }
     } else if (tabId === 'tab-attendance') {
       tabBtnAttendance.classList.add('active');
       tabBtnAttendance.setAttribute('aria-selected', 'true');
@@ -226,8 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentMenuData = null;
   let currentMenuSource = null;
   let currentMenuLastFetched = null;
-  let selectedDay = 'Monday';
-  let todayDayName = 'Monday';
+  const _initMenuDate = new Date();
+  const _initMenuDayIndex = (_initMenuDate.getDay() + 6) % 7;
+  let todayDayName = WEEKDAYS[_initMenuDayIndex];
+  let selectedDay = todayDayName;
 
   function isSecondaryItem(item) {
     if (!item) return false;
@@ -634,6 +644,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const now = new Date();
     const currentDayIndex = (now.getDay() + 6) % 7;
     todayDayName = WEEKDAYS[currentDayIndex];
+    if (!selectedDay) selectedDay = todayDayName;
     const isViewingToday = selectedDay === todayDayName;
 
     if (menuDayTitle) {
@@ -652,6 +663,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const day = btn.getAttribute('data-day');
       btn.classList.toggle('active', day === selectedDay);
       btn.classList.toggle('is-today', day === todayDayName);
+      const chipDate = getDateForWeekday(day);
+      btn.title = `${day} (${formatShortDate(chipDate)})`;
     });
 
     if (!currentMenuData || !currentMenuData[selectedDay]) {

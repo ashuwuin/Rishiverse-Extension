@@ -1764,7 +1764,7 @@
     const now = new Date();
     const currentDayIndex = (now.getDay() + 6) % 7;
     todayDayName = WEEKDAYS[currentDayIndex];
-    if (!selectedMenuDay) selectedMenuDay = todayDayName;
+    selectedMenuDay = todayDayName;
 
     const isOfficialMenu = Boolean(cachedMenuSource && cachedMenuSource.startsWith('rishiverse'));
     if (activeTabId === 'tab-menu') {
@@ -1842,8 +1842,16 @@
     });
 
     const isOfficialMenu = Boolean(cachedMenuSource && cachedMenuSource.startsWith('rishiverse'));
-    if (activeTabId === 'tab-menu' && (!cachedMenuData || !isOfficialMenu)) {
-      loadMenuDataWidget(!isOfficialMenu);
+    if (activeTabId === 'tab-menu') {
+      const now = new Date();
+      const currentDayIndex = (now.getDay() + 6) % 7;
+      todayDayName = WEEKDAYS[currentDayIndex];
+      selectedMenuDay = todayDayName;
+      if (!cachedMenuData || !isOfficialMenu) {
+        loadMenuDataWidget(!isOfficialMenu);
+      } else {
+        renderWidgetMenu();
+      }
     } else if (activeTabId === 'tab-attendance' && !cachedAttendanceData) {
       inPageSyncAttendance(true);
     }
@@ -2380,6 +2388,8 @@
       const day = chip.getAttribute('data-day');
       chip.classList.toggle('active', day === selectedMenuDay);
       chip.classList.toggle('is-today', day === todayDayName);
+      const chipDate = getDateForWeekday(day);
+      chip.title = `${day} (${formatShortDate(chipDate)})`;
     });
 
     updateWidgetMenuStatus(cachedMenuLastFetched, cachedMenuSource);
