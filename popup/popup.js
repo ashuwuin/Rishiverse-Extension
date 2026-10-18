@@ -357,9 +357,18 @@ document.addEventListener('DOMContentLoaded', () => {
               else if (typeof mVal?.menuItems === 'string') items = mVal.menuItems.split(/[,;\n]+/);
               else if (typeof mVal === 'string') items = mVal.split(/[,;\n]+/);
               items.forEach(rawItem => {
-                const dish = typeof rawItem === 'string' ? rawItem.trim() : (rawItem?.name || rawItem?.item || '');
-                if (dish && dish !== 'Menu will be updated soon' && !dayMeals[k].includes(dish)) {
-                  dayMeals[k].push(dish);
+                let text = '';
+                if (typeof rawItem === 'string') {
+                  text = rawItem;
+                } else if (rawItem && typeof rawItem === 'object') {
+                  text = rawItem.meal || rawItem.menuItems || rawItem.name || rawItem.item || '';
+                }
+                if (text) {
+                  text.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean).forEach(d => {
+                    if (d !== 'Menu will be updated soon' && !dayMeals[k].includes(d)) {
+                      dayMeals[k].push(d);
+                    }
+                  });
                 }
               });
             }
@@ -1107,8 +1116,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Live Mess Menu extraction if on /mess-menu
     try {
       if (window.location.pathname.includes('/mess-menu')) {
-        const mealForms = document.querySelectorAll('form');
-        if (mealForms && mealForms.length > 0) {
+        const h2Elements = document.querySelectorAll('h2');
+        if (h2Elements && h2Elements.length > 0) {
           const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
           let dayName = null;
           const bodyText = document.body.innerText || '';
@@ -1124,17 +1133,25 @@ document.addEventListener('DOMContentLoaded', () => {
           }
 
           const dayMeals = { breakfast: [], lunch: [], snacks: [], dinner: [] };
-          mealForms.forEach(form => {
-            const h2 = form.querySelector('h2');
-            if (!h2) return;
-            const type = h2.textContent.trim().toLowerCase();
-            if (!dayMeals[type]) return;
+          h2Elements.forEach(h2 => {
+            const h2Text = (h2.textContent || '').trim().toUpperCase();
+            let key = null;
+            if (h2Text.includes('BREAKFAST')) key = 'breakfast';
+            else if (h2Text.includes('LUNCH')) key = 'lunch';
+            else if (h2Text.includes('SNACK')) key = 'snacks';
+            else if (h2Text.includes('DINNER')) key = 'dinner';
+            if (!key) return;
 
-            const items = form.querySelectorAll('ul li');
+            const card = h2.closest('form') || h2.closest('.rounded-2xl') || h2.closest('.rounded-xl') || h2.closest('.rounded-lg') || h2.closest('div.border') || h2.closest('div.shadow') || h2.parentElement?.parentElement;
+            if (!card) return;
+
+            const items = card.querySelectorAll('ul li, li');
             items.forEach(li => {
-              const dish = li.textContent.trim();
-              if (dish && !dish.includes('Menu will be updated soon')) {
-                if (!dayMeals[type].includes(dish)) dayMeals[type].push(dish);
+              const dish = (li.textContent || '').trim();
+              if (dish && !dish.includes('Menu will be updated soon') && !dish.startsWith('+ Add Item')) {
+                dish.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean).forEach(d => {
+                  if (!dayMeals[key].includes(d)) dayMeals[key].push(d);
+                });
               }
             });
           });

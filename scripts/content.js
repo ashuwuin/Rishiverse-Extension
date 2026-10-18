@@ -234,8 +234,10 @@
   let cachedMenuData = null;
   let cachedMenuSource = null;
   let cachedMenuLastFetched = null;
-  let selectedMenuDay = 'Monday';
-  let todayDayName = 'Monday';
+  const _initDate = new Date();
+  const _initDayIndex = (_initDate.getDay() + 6) % 7;
+  let todayDayName = WEEKDAYS[_initDayIndex];
+  let selectedMenuDay = todayDayName;
   let cachedAttendanceData = null;
   let currentAttendanceTarget = 0.75;
 
@@ -1698,11 +1700,24 @@
     fabBtn?.classList.add('open');
     updateFabIcon(true);
 
+    const now = new Date();
+    const currentDayIndex = (now.getDay() + 6) % 7;
+    todayDayName = WEEKDAYS[currentDayIndex];
+    if (!selectedMenuDay) selectedMenuDay = todayDayName;
+
     const isOfficialMenu = Boolean(cachedMenuSource && cachedMenuSource.startsWith('rishiverse'));
-    if (activeTabId === 'tab-menu' && (!cachedMenuData || !isOfficialMenu)) {
-      loadMenuDataWidget(!isOfficialMenu);
-    } else if (activeTabId === 'tab-attendance' && !cachedAttendanceData) {
-      inPageSyncAttendance(true);
+    if (activeTabId === 'tab-menu') {
+      if (!cachedMenuData || !isOfficialMenu) {
+        loadMenuDataWidget(!isOfficialMenu);
+      } else {
+        renderWidgetMenu();
+      }
+    } else if (activeTabId === 'tab-attendance') {
+      if (!cachedAttendanceData) {
+        inPageSyncAttendance(true);
+      } else {
+        renderWidgetAttendance(cachedAttendanceData);
+      }
     }
   }
 
@@ -2014,9 +2029,18 @@
                 else if (typeof mVal?.menuItems === 'string') items = mVal.menuItems.split(/[,;\n]+/);
                 else if (typeof mVal === 'string') items = mVal.split(/[,;\n]+/);
                 items.forEach(rawItem => {
-                  const dish = typeof rawItem === 'string' ? rawItem.trim() : (rawItem?.name || rawItem?.item || '');
-                  if (dish && dish !== 'Menu will be updated soon' && !dayMeals[k].includes(dish)) {
-                    dayMeals[k].push(dish);
+                  let text = '';
+                  if (typeof rawItem === 'string') {
+                    text = rawItem;
+                  } else if (rawItem && typeof rawItem === 'object') {
+                    text = rawItem.meal || rawItem.menuItems || rawItem.name || rawItem.item || '';
+                  }
+                  if (text) {
+                    text.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean).forEach(d => {
+                      if (d !== 'Menu will be updated soon' && !dayMeals[k].includes(d)) {
+                        dayMeals[k].push(d);
+                      }
+                    });
                   }
                 });
               }
@@ -2089,8 +2113,8 @@
     if (!window.location.pathname.includes('/mess-menu')) return null;
 
     try {
-      const mealForms = document.querySelectorAll('form');
-      if (!mealForms || mealForms.length === 0) return null;
+      const h2Elements = document.querySelectorAll('h2');
+      if (!h2Elements || h2Elements.length === 0) return null;
 
       let dayName = null;
       const textAll = document.body.innerText || '';
@@ -2112,19 +2136,27 @@
         dinner: []
       };
 
-      mealForms.forEach(form => {
-        const h2 = form.querySelector('h2');
-        if (!h2) return;
-        const type = h2.textContent.trim().toLowerCase();
-        if (!dayMeals[type]) return;
+      h2Elements.forEach(h2 => {
+        const h2Text = (h2.textContent || '').trim().toUpperCase();
+        let key = null;
+        if (h2Text.includes('BREAKFAST')) key = 'breakfast';
+        else if (h2Text.includes('LUNCH')) key = 'lunch';
+        else if (h2Text.includes('SNACK')) key = 'snacks';
+        else if (h2Text.includes('DINNER')) key = 'dinner';
+        if (!key) return;
 
-        const items = form.querySelectorAll('ul li');
-        items.forEach(li => {
-          const dish = li.textContent.trim();
-          if (dish && !dish.includes('Menu will be updated soon')) {
-            if (!dayMeals[type].includes(dish)) {
-              dayMeals[type].push(dish);
-            }
+        const card = h2.closest('form') || h2.closest('.rounded-2xl') || h2.closest('.rounded-xl') || h2.closest('.rounded-lg') || h2.closest('div.border') || h2.closest('div.shadow') || h2.parentElement?.parentElement;
+        if (!card) return;
+
+        const listItems = card.querySelectorAll('ul li, li');
+        listItems.forEach(li => {
+          const dish = (li.textContent || '').trim();
+          if (dish && !dish.includes('Menu will be updated soon') && !dish.startsWith('+ Add Item')) {
+            dish.split(/[,;\n]+/).map(s => s.trim()).filter(Boolean).forEach(d => {
+              if (!dayMeals[key].includes(d)) {
+                dayMeals[key].push(d);
+              }
+            });
           }
         });
       });
@@ -2133,7 +2165,9 @@
       if (hasItems) {
         return { dayName, dayMeals };
       }
-    } catch (e) {}
+    } catch (e) {
+      console.warn('[Rishiverse] scrapeMenuFromDom error:', e);
+    }
     return null;
   }
 
