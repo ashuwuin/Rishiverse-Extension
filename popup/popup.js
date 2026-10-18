@@ -141,35 +141,55 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   darkToggle.addEventListener('change', () => {
-    const isDark = darkToggle.checked;
-    updateStatusDisplay(isDark);
-    chrome.storage.local.set({ darkMode: isDark });
+    try {
+      const isDark = darkToggle.checked;
+      updateStatusDisplay(isDark);
+      chrome.storage.local.set({ darkMode: isDark });
+    } catch (e) {
+      console.warn('[Rishiverse] Dark mode toggle error:', e);
+    }
   });
 
   btnMidnight.addEventListener('click', () => {
-    setActiveStyleButton('midnight');
-    chrome.storage.local.set({ themeStyle: 'midnight' });
+    try {
+      setActiveStyleButton('midnight');
+      chrome.storage.local.set({ themeStyle: 'midnight' });
+    } catch (e) {
+      console.warn('[Rishiverse] Midnight button error:', e);
+    }
   });
 
   btnOled.addEventListener('click', () => {
-    setActiveStyleButton('oled');
-    chrome.storage.local.set({ themeStyle: 'oled' });
+    try {
+      setActiveStyleButton('oled');
+      chrome.storage.local.set({ themeStyle: 'oled' });
+    } catch (e) {
+      console.warn('[Rishiverse] OLED button error:', e);
+    }
   });
 
   quickTogglePref.addEventListener('change', () => {
-    chrome.storage.local.set({ showQuickToggle: quickTogglePref.checked });
+    try {
+      chrome.storage.local.set({ showQuickToggle: quickTogglePref.checked });
+    } catch (e) {
+      console.warn('[Rishiverse] Quick toggle pref error:', e);
+    }
   });
 
   systemThemePref.addEventListener('change', () => {
-    const useSystem = systemThemePref.checked;
-    darkToggle.disabled = useSystem;
-    if (useSystem) {
-      statusText.textContent = 'Auto (System)';
-      statusText.classList.remove('disabled');
-    } else {
-      updateStatusDisplay(darkToggle.checked);
+    try {
+      const useSystem = systemThemePref.checked;
+      darkToggle.disabled = useSystem;
+      if (useSystem) {
+        statusText.textContent = 'Auto (System)';
+        statusText.classList.remove('disabled');
+      } else {
+        updateStatusDisplay(darkToggle.checked);
+      }
+      chrome.storage.local.set({ useSystemTheme: useSystem });
+    } catch (e) {
+      console.warn('[Rishiverse] System theme pref error:', e);
     }
-    chrome.storage.local.set({ useSystemTheme: useSystem });
   });
 
   function updateStatusDisplay(isDark) {

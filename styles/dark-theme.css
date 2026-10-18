@@ -50,27 +50,30 @@ html[data-rishiverse-dark="true"] {
   --text-body: #f1f5f9 !important;
   --text-placeholder: #94a3b8 !important;
   
-  /* Tailwind v4 gray palette overrides to eliminate dim silver */
-  --color-gray-400: #94a3b8 !important;
-  --color-gray-500: #cbd5e1 !important;
-  --color-gray-600: #e2e8f0 !important;
-  --color-gray-700: #f1f5f9 !important;
-  --color-gray-800: #f8fafc !important;
-  --color-gray-900: #ffffff !important;
+  /* Tailwind v4 dark neutral surfaces & borders (replaces white-inverted tokens) */
+  --color-gray-950: #0f1117 !important;
+  --color-gray-900: #181b24 !important;
+  --color-gray-800: #222634 !important;
+  --color-gray-700: #282d3d !important;
+  --color-gray-600: #373f54 !important;
+  --color-gray-500: #475569 !important;
+  --color-gray-400: #64748b !important;
 
-  --color-neutral-400: #94a3b8 !important;
-  --color-neutral-500: #cbd5e1 !important;
-  --color-neutral-600: #e2e8f0 !important;
-  --color-neutral-700: #f1f5f9 !important;
-  --color-neutral-800: #f8fafc !important;
-  --color-neutral-900: #ffffff !important;
+  --color-neutral-950: #0f1117 !important;
+  --color-neutral-900: #181b24 !important;
+  --color-neutral-800: #222634 !important;
+  --color-neutral-700: #282d3d !important;
+  --color-neutral-600: #373f54 !important;
+  --color-neutral-500: #475569 !important;
+  --color-neutral-400: #64748b !important;
 
-  --color-slate-400: #94a3b8 !important;
-  --color-slate-500: #cbd5e1 !important;
-  --color-slate-600: #e2e8f0 !important;
-  --color-slate-700: #f1f5f9 !important;
-  --color-slate-800: #f8fafc !important;
-  --color-slate-900: #ffffff !important;
+  --color-slate-950: #0f1117 !important;
+  --color-slate-900: #181b24 !important;
+  --color-slate-800: #222634 !important;
+  --color-slate-700: #282d3d !important;
+  --color-slate-600: #373f54 !important;
+  --color-slate-500: #475569 !important;
+  --color-slate-400: #64748b !important;
   
   --card-bg-100: #181b24 !important;
   --card-bg-200: #1e222e !important;
@@ -111,6 +114,24 @@ html[data-rishiverse-dark="true"][data-theme-style="oled"] {
   --grey-100: #050507 !important;
   --grey-200: #0a0b0e !important;
   --border-100: #1e212b !important;
+
+  --color-gray-950: #000000 !important;
+  --color-gray-900: #0c0d11 !important;
+  --color-gray-800: #14161d !important;
+  --color-gray-700: #1e212b !important;
+  --color-gray-600: #2b303d !important;
+
+  --color-neutral-950: #000000 !important;
+  --color-neutral-900: #0c0d11 !important;
+  --color-neutral-800: #14161d !important;
+  --color-neutral-700: #1e212b !important;
+  --color-neutral-600: #2b303d !important;
+
+  --color-slate-950: #000000 !important;
+  --color-slate-900: #0c0d11 !important;
+  --color-slate-800: #14161d !important;
+  --color-slate-700: #1e212b !important;
+  --color-slate-600: #2b303d !important;
 }
 
 /* 3. Base High Contrast Typography & Visibility */
@@ -189,8 +210,6 @@ html.dark .text-slate-600,
 html.dark .text-neutral-500,
 html.dark .text-gray-500,
 html.dark .text-slate-500,
-html.dark .text-muted-foreground,
-html.dark [class*="text-muted-foreground"],
 html[data-rishiverse-dark="true"] .text-neutral-700,
 html[data-rishiverse-dark="true"] .text-gray-700,
 html[data-rishiverse-dark="true"] .text-slate-700,
@@ -199,10 +218,15 @@ html[data-rishiverse-dark="true"] .text-gray-600,
 html[data-rishiverse-dark="true"] .text-slate-600,
 html[data-rishiverse-dark="true"] .text-neutral-500,
 html[data-rishiverse-dark="true"] .text-gray-500,
-html[data-rishiverse-dark="true"] .text-slate-500,
+html[data-rishiverse-dark="true"] .text-slate-500 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-muted-foreground,
+html.dark [class*="text-muted-foreground"],
 html[data-rishiverse-dark="true"] .text-muted-foreground,
 html[data-rishiverse-dark="true"] [class*="text-muted-foreground"] {
-  color: #f1f5f9 !important;
+  color: #94a3b8 !important;
 }
 
 html.dark .text-neutral-400,
@@ -484,6 +508,14 @@ html.dark [class*="bg-[#FFF8F3]"],
 html[data-rishiverse-dark="true"] [class*="bg-[#FFF8F3]"],
 html.dark [class*="bg-[#fff8f3]"],
 html[data-rishiverse-dark="true"] [class*="bg-[#fff8f3]"],
+html.dark [class*="bg-[#FCFBFA]"],
+html.dark [class*="bg-[#fcfbfa]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FCFBFA]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fcfbfa]"],
+html.dark [class*="bg-[#FFF"],
+html.dark [class*="bg-[#fff"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff"],
 html.dark [class*="bg-[#f0c9ad]"],
 html[data-rishiverse-dark="true"] [class*="bg-[#f0c9ad]"],
 html.dark [class*="bg-[#f0c9ad]"],
@@ -562,7 +594,43 @@ html[data-rishiverse-dark="true"] [class*="border-[#f4f4f4]"] {
 
 /* 6. Common Background Class Overrides */
 html.dark .bg-white,
-html[data-rishiverse-dark="true"] .bg-white {
+html.dark .sm\:bg-white,
+html.dark .md\:bg-white,
+html.dark .lg\:bg-white,
+html.dark .xl\:bg-white,
+html.dark .\!bg-white,
+html.dark [class*="bg-white"],
+html.dark .bg-\[\#FFFFFF\],
+html.dark .bg-\[\#ffffff\],
+html.dark .bg-\[\#fff\],
+html.dark .bg-\[\#FFF\],
+html.dark [class*="bg-[#FFFFFF]"],
+html.dark [class*="bg-[#ffffff]"],
+html.dark [class*="bg-[#fff]"],
+html.dark [class*="bg-[#FFF]"],
+html.dark .dark\:bg-neutral-900,
+html.dark .dark\:sm\:bg-neutral-900,
+html.dark [class*="dark:bg-neutral-900"],
+html.dark [class*="dark:sm:bg-neutral-900"],
+html[data-rishiverse-dark="true"] .bg-white,
+html[data-rishiverse-dark="true"] .sm\:bg-white,
+html[data-rishiverse-dark="true"] .md\:bg-white,
+html[data-rishiverse-dark="true"] .lg\:bg-white,
+html[data-rishiverse-dark="true"] .xl\:bg-white,
+html[data-rishiverse-dark="true"] .\!bg-white,
+html[data-rishiverse-dark="true"] [class*="bg-white"],
+html[data-rishiverse-dark="true"] .bg-\[\#FFFFFF\],
+html[data-rishiverse-dark="true"] .bg-\[\#ffffff\],
+html[data-rishiverse-dark="true"] .bg-\[\#fff\],
+html[data-rishiverse-dark="true"] .bg-\[\#FFF\],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFFFFF]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#ffffff]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF]"],
+html[data-rishiverse-dark="true"] .dark\:bg-neutral-900,
+html[data-rishiverse-dark="true"] .dark\:sm\:bg-neutral-900,
+html[data-rishiverse-dark="true"] [class*="dark:bg-neutral-900"],
+html[data-rishiverse-dark="true"] [class*="dark:sm:bg-neutral-900"] {
   background-color: var(--card) !important;
 }
 
@@ -637,18 +705,89 @@ html[data-rishiverse-dark="true"] aside a:hover {
   color: #ffffff !important;
 }
 
-/* 9. Cards, Dialogs & Modals */
+/* 9. Cards, Dialogs, Modals, Popovers & Dropdown Menus */
 html.dark [role="dialog"],
 html.dark [role="menu"],
 html.dark [role="listbox"],
 html.dark [data-radix-popper-content-wrapper],
+html.dark [data-radix-popper-content-wrapper] > *,
+html.dark [data-radix-menu-content],
+html.dark [data-radix-popover-content],
+html.dark [class*="origin-top-right"],
+html.dark [class*="origin-top-left"],
+html.dark [class*="origin-bottom-right"],
+html.dark [class*="origin-bottom-left"],
+html.dark div[class*="fixed z-[999]"] > div,
+html.dark div[class*="fixed z-[9999]"] > div,
+html.dark div[class*="fixed z-50"] > div,
+html.dark div[class*="rounded-2xl"][class*="shadow-lg"],
+html.dark div[class*="rounded-t-2xl"][class*="shadow-lg"],
+html.dark div[class*="rounded-t-3xl"][class*="shadow-xl"],
 html[data-rishiverse-dark="true"] [role="dialog"],
 html[data-rishiverse-dark="true"] [role="menu"],
 html[data-rishiverse-dark="true"] [role="listbox"],
-html[data-rishiverse-dark="true"] [data-radix-popper-content-wrapper] {
+html[data-rishiverse-dark="true"] [data-radix-popper-content-wrapper],
+html[data-rishiverse-dark="true"] [data-radix-popper-content-wrapper] > *,
+html[data-rishiverse-dark="true"] [data-radix-menu-content],
+html[data-rishiverse-dark="true"] [data-radix-popover-content],
+html[data-rishiverse-dark="true"] [class*="origin-top-right"],
+html[data-rishiverse-dark="true"] [class*="origin-top-left"],
+html[data-rishiverse-dark="true"] [class*="origin-bottom-right"],
+html[data-rishiverse-dark="true"] [class*="origin-bottom-left"],
+html[data-rishiverse-dark="true"] div[class*="fixed z-[999]"] > div,
+html[data-rishiverse-dark="true"] div[class*="fixed z-[9999]"] > div,
+html[data-rishiverse-dark="true"] div[class*="fixed z-50"] > div,
+html[data-rishiverse-dark="true"] div[class*="rounded-2xl"][class*="shadow-lg"],
+html[data-rishiverse-dark="true"] div[class*="rounded-t-2xl"][class*="shadow-lg"],
+html[data-rishiverse-dark="true"] div[class*="rounded-t-3xl"][class*="shadow-xl"] {
   background-color: var(--popover) !important;
   color: #ffffff !important;
   border-color: var(--border) !important;
+}
+
+/* Dropdown Menu Item Hovers & Dividers */
+html.dark [class*="origin-top-right"] button:hover,
+html.dark [class*="origin-top-right"] a:hover,
+html.dark [class*="origin-top-left"] button:hover,
+html.dark [class*="origin-top-left"] a:hover,
+html.dark [class*="hover:bg-gray-50"]:hover,
+html.dark [class*="hover:bg-neutral-50"]:hover,
+html.dark [class*="hover:bg-gray-100"]:hover,
+html.dark [class*="hover:bg-neutral-100"]:hover,
+html[data-rishiverse-dark="true"] [class*="origin-top-right"] button:hover,
+html[data-rishiverse-dark="true"] [class*="origin-top-right"] a:hover,
+html[data-rishiverse-dark="true"] [class*="origin-top-left"] button:hover,
+html[data-rishiverse-dark="true"] [class*="origin-top-left"] a:hover,
+html[data-rishiverse-dark="true"] [class*="hover:bg-gray-50"]:hover,
+html[data-rishiverse-dark="true"] [class*="hover:bg-neutral-50"]:hover,
+html[data-rishiverse-dark="true"] [class*="hover:bg-gray-100"]:hover,
+html[data-rishiverse-dark="true"] [class*="hover:bg-neutral-100"]:hover {
+  background-color: var(--accent) !important;
+}
+
+/* Subtle Dark Borders in Dropdown Sections */
+html.dark [class*="dark:border-neutral-800"],
+html.dark [class*="dark:divide-neutral-800"] > :not([hidden]) ~ :not([hidden]),
+html.dark [class*="divide-neutral-200"] > :not([hidden]) ~ :not([hidden]),
+html[data-rishiverse-dark="true"] [class*="dark:border-neutral-800"],
+html[data-rishiverse-dark="true"] [class*="dark:divide-neutral-800"] > :not([hidden]) ~ :not([hidden]),
+html[data-rishiverse-dark="true"] [class*="divide-neutral-200"] > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border) !important;
+}
+
+/* Typography Hierarchy in Profile & Dropdown Menus */
+html.dark [class*="origin-top-right"] .font-medium,
+html.dark [class*="origin-top-left"] .font-medium,
+html[data-rishiverse-dark="true"] [class*="origin-top-right"] .font-medium,
+html[data-rishiverse-dark="true"] [class*="origin-top-left"] .font-medium {
+  color: #ffffff !important;
+}
+
+html.dark [class*="origin-top-right"] .text-muted-foreground,
+html.dark [class*="origin-top-left"] .text-muted-foreground,
+html[data-rishiverse-dark="true"] [class*="origin-top-right"] .text-muted-foreground,
+html[data-rishiverse-dark="true"] [class*="origin-top-left"] .text-muted-foreground {
+  color: #94a3b8 !important;
 }
 
 /* 10. Tables */

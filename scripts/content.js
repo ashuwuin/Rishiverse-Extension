@@ -100,30 +100,62 @@
     updateWidgetThemeState(settings);
   }
 
-  // Pre-apply cached dark mode before DOM loads to prevent white flash
+  // Pre-apply cached dark mode and style before DOM loads to prevent flash
   try {
     const cachedState = localStorage.getItem('rishiverse_ext_dark');
+    const cachedStyle = localStorage.getItem('rishiverse_ext_style') || 'midnight';
     if (cachedState === null || cachedState === 'true') {
       document.documentElement.classList.add('dark');
       document.documentElement.setAttribute('data-rishiverse-dark', 'true');
+      document.documentElement.setAttribute('data-theme-style', cachedStyle);
     }
   } catch (e) {}
 
-  chrome.storage.local.get(
-    {
-      darkMode: true,
-      themeStyle: 'midnight',
-      showQuickToggle: true,
-      useSystemTheme: false
-    },
-    (items) => {
-      currentSettings = items;
-      try {
-        localStorage.setItem('rishiverse_ext_dark', items.darkMode);
-      } catch (e) {}
-      applyTheme(currentSettings);
+  function isExtensionContextValid() {
+    return Boolean(typeof chrome !== 'undefined' && chrome.runtime && chrome.runtime.id);
+  }
+
+  function safeStorageSet(data, callback) {
+    try {
+      if (isExtensionContextValid() && chrome.storage && chrome.storage.local) {
+        chrome.storage.local.set(data, () => {
+          if (chrome.runtime?.lastError) {
+            // Silently suppress invalidated context errors
+          }
+          if (typeof callback === 'function') callback();
+        });
+      }
+    } catch (e) {
+      // Prevent unhandled exceptions from broken context
     }
-  );
+  }
+
+  if (isExtensionContextValid() && chrome.storage && chrome.storage.local) {
+    chrome.storage.local.get(
+      {
+        darkMode: true,
+        themeStyle: 'midnight',
+        showQuickToggle: true,
+        useSystemTheme: false
+      },
+      (items) => {
+        currentSettings = items;
+        try {
+          localStorage.setItem('rishiverse_ext_dark', items.darkMode);
+          localStorage.setItem('rishiverse_ext_style', items.themeStyle || 'midnight');
+        } catch (e) {}
+        applyTheme(currentSettings);
+      }
+    );
+  } else {
+    try {
+      const cachedDark = localStorage.getItem('rishiverse_ext_dark');
+      const cachedStyle = localStorage.getItem('rishiverse_ext_style');
+      if (cachedDark !== null) currentSettings.darkMode = cachedDark === 'true';
+      if (cachedStyle) currentSettings.themeStyle = cachedStyle;
+    } catch (e) {}
+    applyTheme(currentSettings);
+  }
 
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'local') {
@@ -1652,34 +1684,63 @@
     const prefSystem = shadowRoot.getElementById('rv-pref-system');
 
     darkToggle?.addEventListener('change', () => {
-      const isDark = darkToggle.checked;
-      currentSettings.darkMode = isDark;
-      chrome.storage.local.set({ darkMode: isDark });
-      applyTheme(currentSettings);
+      try {
+        const isDark = darkToggle.checked;
+        currentSettings.darkMode = isDark;
+        try {
+          localStorage.setItem('rishiverse_ext_dark', isDark);
+        } catch (e) {}
+        safeStorageSet({ darkMode: isDark });
+        applyTheme(currentSettings);
+      } catch (err) {
+        console.warn('[Rishiverse] Failed to toggle dark mode:', err);
+      }
     });
 
     btnMidnight?.addEventListener('click', () => {
-      currentSettings.themeStyle = 'midnight';
-      chrome.storage.local.set({ themeStyle: 'midnight' });
-      applyTheme(currentSettings);
+      try {
+        currentSettings.themeStyle = 'midnight';
+        try {
+          localStorage.setItem('rishiverse_ext_style', 'midnight');
+        } catch (e) {}
+        safeStorageSet({ themeStyle: 'midnight' });
+        applyTheme(currentSettings);
+      } catch (err) {
+        console.warn('[Rishiverse] Failed to set Midnight style:', err);
+      }
     });
 
     btnOled?.addEventListener('click', () => {
-      currentSettings.themeStyle = 'oled';
-      chrome.storage.local.set({ themeStyle: 'oled' });
-      applyTheme(currentSettings);
+      try {
+        currentSettings.themeStyle = 'oled';
+        try {
+          localStorage.setItem('rishiverse_ext_style', 'oled');
+        } catch (e) {}
+        safeStorageSet({ themeStyle: 'oled' });
+        applyTheme(currentSettings);
+      } catch (err) {
+        console.warn('[Rishiverse] Failed to set OLED style:', err);
+      }
     });
 
     prefToggle?.addEventListener('change', () => {
-      currentSettings.showQuickToggle = prefToggle.checked;
-      chrome.storage.local.set({ showQuickToggle: prefToggle.checked });
-      applyTheme(currentSettings);
+      try {
+        currentSettings.showQuickToggle = prefToggle.checked;
+        safeStorageSet({ showQuickToggle: prefToggle.checked });
+        applyTheme(currentSettings);
+      } catch (err) {
+        console.warn('[Rishiverse] Failed to set quick toggle preference:', err);
+      }
     });
 
     prefSystem?.addEventListener('change', () => {
-      currentSettings.useSystemTheme = prefSystem.checked;
-      chrome.storage.local.set({ useSystemTheme: prefSystem.checked });
-      applyTheme(currentSettings);
+      try {
+        currentSettings.useSystemTheme = prefSystem.checked;
+        safeStorageSet({ useSystemTheme: prefSystem.checked });
+        applyTheme(currentSettings);
+      } catch (err) {
+        console.warn('[Rishiverse] Failed to set system theme preference:', err);
+      }
     });
   }
 
