@@ -1,0 +1,810 @@
+/* ==========================================================================
+   RISHIVERSE DARK MODE - HIGH CONTRAST CRISP STYLESHEET
+   Comprehensive theme overrides for Rishiverse ERP (Rishihood University)
+   ========================================================================== */
+
+/* 1. Root & Theme Variables Override (Midnight Default) */
+html.dark,
+html[data-rishiverse-dark="true"] {
+  --background: #0f1117 !important;
+  --foreground: #ffffff !important;
+  
+  --card: #181b24 !important;
+  --card-foreground: #ffffff !important;
+  
+  --popover: #181b24 !important;
+  --popover-foreground: #ffffff !important;
+  
+  --primary: #c45a10 !important;
+  --primary-50: #2c180e !important;
+  --primary-foreground: #ffffff !important;
+  --primary-700: #e0762a !important;
+  --primary-600: #d76312 !important;
+  --primary-500: #c45a10 !important;
+  
+  --secondary: #222634 !important;
+  --secondary-foreground: #ffffff !important;
+  
+  --muted: #1e222d !important;
+  --muted-foreground: #e2e8f0 !important;
+  
+  --accent: #262b3a !important;
+  --accent-foreground: #ffffff !important;
+  
+  --destructive: #ef4444 !important;
+  --border: #282d3d !important;
+  --input: #282d3d !important;
+  --ring: #c45a10 !important;
+  
+  --sidebar: #13161f !important;
+  --sidebar-foreground: #ffffff !important;
+  --sidebar-primary: #c45a10 !important;
+  --sidebar-primary-foreground: #ffffff !important;
+  --sidebar-accent: #222634 !important;
+  --sidebar-accent-foreground: #ffffff !important;
+  --sidebar-border: #282d3d !important;
+  
+  /* High contrast text tokens */
+  --text-heading: #ffffff !important;
+  --text-subheading: #f8fafc !important;
+  --text-body: #f1f5f9 !important;
+  --text-placeholder: #94a3b8 !important;
+  
+  /* Tailwind v4 gray palette overrides to eliminate dim silver */
+  --color-gray-400: #94a3b8 !important;
+  --color-gray-500: #cbd5e1 !important;
+  --color-gray-600: #e2e8f0 !important;
+  --color-gray-700: #f1f5f9 !important;
+  --color-gray-800: #f8fafc !important;
+  --color-gray-900: #ffffff !important;
+
+  --color-neutral-400: #94a3b8 !important;
+  --color-neutral-500: #cbd5e1 !important;
+  --color-neutral-600: #e2e8f0 !important;
+  --color-neutral-700: #f1f5f9 !important;
+  --color-neutral-800: #f8fafc !important;
+  --color-neutral-900: #ffffff !important;
+
+  --color-slate-400: #94a3b8 !important;
+  --color-slate-500: #cbd5e1 !important;
+  --color-slate-600: #e2e8f0 !important;
+  --color-slate-700: #f1f5f9 !important;
+  --color-slate-800: #f8fafc !important;
+  --color-slate-900: #ffffff !important;
+  
+  --card-bg-100: #181b24 !important;
+  --card-bg-200: #1e222e !important;
+  --card-bg-300: #242937 !important;
+  --card-bg-400: #292f3f !important;
+  --card-bg-500: #303749 !important;
+  --card-bg-600: #373f54 !important;
+  
+  --input-100: #1b1e28 !important;
+  --input-200: #242937 !important;
+  --input-300: #303749 !important;
+  
+  --border-100: #282d3d !important;
+  --icon-100: #cbd5e1 !important;
+  --icon-200: #f1f5f9 !important;
+  
+  --grey-100: #13161f !important;
+  --grey-200: #181b24 !important;
+  --grey-300: #1f2430 !important;
+  --grey-400: #2b3243 !important;
+  
+  color-scheme: dark !important;
+}
+
+/* 2. OLED Black Mode Style */
+html.dark[data-theme-style="oled"],
+html[data-rishiverse-dark="true"][data-theme-style="oled"] {
+  --background: #000000 !important;
+  --card: #0c0d11 !important;
+  --popover: #0c0d11 !important;
+  --sidebar: #050507 !important;
+  --muted: #14161d !important;
+  --border: #1e212b !important;
+  --input: #1e212b !important;
+  --card-bg-100: #0a0b0e !important;
+  --card-bg-200: #111319 !important;
+  --card-bg-300: #181b24 !important;
+  --grey-100: #050507 !important;
+  --grey-200: #0a0b0e !important;
+  --border-100: #1e212b !important;
+}
+
+/* 3. Base High Contrast Typography & Visibility */
+html.dark,
+html.dark body,
+html[data-rishiverse-dark="true"],
+html[data-rishiverse-dark="true"] body {
+  background-color: var(--background) !important;
+  color: #ffffff !important;
+}
+
+html.dark h1, html.dark h2, html.dark h3, html.dark h4, html.dark h5, html.dark h6,
+html.dark strong, html.dark b,
+html[data-rishiverse-dark="true"] h1, html[data-rishiverse-dark="true"] h2,
+html[data-rishiverse-dark="true"] h3, html[data-rishiverse-dark="true"] h4,
+html[data-rishiverse-dark="true"] h5, html[data-rishiverse-dark="true"] h6,
+html[data-rishiverse-dark="true"] strong, html[data-rishiverse-dark="true"] b {
+  color: #ffffff !important;
+}
+
+html.dark p, html.dark span, html.dark label, html.dark td, html.dark th, html.dark li,
+html[data-rishiverse-dark="true"] p, html[data-rishiverse-dark="true"] span,
+html[data-rishiverse-dark="true"] label, html[data-rishiverse-dark="true"] td,
+html[data-rishiverse-dark="true"] th, html[data-rishiverse-dark="true"] li {
+  color: #f1f5f9;
+}
+
+/* Boost low text opacity so content doesn't dim into darkness */
+html.dark [class*="opacity-50"],
+html.dark [class*="opacity-60"],
+html.dark [class*="opacity-70"],
+html.dark [class*="opacity-80"],
+html[data-rishiverse-dark="true"] [class*="opacity-50"],
+html[data-rishiverse-dark="true"] [class*="opacity-60"],
+html[data-rishiverse-dark="true"] [class*="opacity-70"],
+html[data-rishiverse-dark="true"] [class*="opacity-80"] {
+  opacity: 0.95 !important;
+}
+
+
+/* Buttons & Links Contrast Protection */
+html.dark button:not([class*="bg-primary"]):not([class*="bg-red-"]):not([class*="bg-green-"]):not([class*="bg-emerald-"]):not([class*="bg-amber-"]):not([class*="bg-[#C45A10]"]):not([class*="bg-[#c45a10]"]),
+html[data-rishiverse-dark="true"] button:not([class*="bg-primary"]):not([class*="bg-red-"]):not([class*="bg-green-"]):not([class*="bg-emerald-"]):not([class*="bg-amber-"]):not([class*="bg-[#C45A10]"]):not([class*="bg-[#c45a10]"]) {
+  color: #f1f5f9 !important;
+}
+
+html.dark a:not([class*="text-primary"]):not([class*="text-red-"]):not([class*="text-green-"]):not([class*="text-emerald-"]):not([class*="text-amber-"]),
+html[data-rishiverse-dark="true"] a:not([class*="text-primary"]):not([class*="text-red-"]):not([class*="text-green-"]):not([class*="text-emerald-"]):not([class*="text-amber-"]) {
+  color: #f1f5f9;
+}
+
+/* 4. Overrides for standard Tailwind text classes */
+html.dark .text-black,
+html.dark .text-neutral-900,
+html.dark .text-gray-900,
+html.dark .text-slate-900,
+html.dark .text-neutral-800,
+html.dark .text-gray-800,
+html.dark .text-slate-800,
+html[data-rishiverse-dark="true"] .text-black,
+html[data-rishiverse-dark="true"] .text-neutral-900,
+html[data-rishiverse-dark="true"] .text-gray-900,
+html[data-rishiverse-dark="true"] .text-slate-900,
+html[data-rishiverse-dark="true"] .text-neutral-800,
+html[data-rishiverse-dark="true"] .text-gray-800,
+html[data-rishiverse-dark="true"] .text-slate-800 {
+  color: #ffffff !important;
+}
+
+html.dark .text-neutral-700,
+html.dark .text-gray-700,
+html.dark .text-slate-700,
+html.dark .text-neutral-600,
+html.dark .text-gray-600,
+html.dark .text-slate-600,
+html.dark .text-neutral-500,
+html.dark .text-gray-500,
+html.dark .text-slate-500,
+html.dark .text-muted-foreground,
+html.dark [class*="text-muted-foreground"],
+html[data-rishiverse-dark="true"] .text-neutral-700,
+html[data-rishiverse-dark="true"] .text-gray-700,
+html[data-rishiverse-dark="true"] .text-slate-700,
+html[data-rishiverse-dark="true"] .text-neutral-600,
+html[data-rishiverse-dark="true"] .text-gray-600,
+html[data-rishiverse-dark="true"] .text-slate-600,
+html[data-rishiverse-dark="true"] .text-neutral-500,
+html[data-rishiverse-dark="true"] .text-gray-500,
+html[data-rishiverse-dark="true"] .text-slate-500,
+html[data-rishiverse-dark="true"] .text-muted-foreground,
+html[data-rishiverse-dark="true"] [class*="text-muted-foreground"] {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-neutral-400,
+html.dark .text-gray-400,
+html.dark .text-slate-400,
+html[data-rishiverse-dark="true"] .text-neutral-400,
+html[data-rishiverse-dark="true"] .text-gray-400,
+html[data-rishiverse-dark="true"] .text-slate-400 {
+  color: #cbd5e1 !important;
+}
+
+/* 5. Custom Hardcoded Hex Overrides for Rishiverse */
+/* Primary text hex classes -> Crisp White */
+html.dark [class*="text-[#2A2728]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2A2728]"],
+html.dark [class*="text-[#2a2728]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2a2728]"],
+html.dark [class*="text-[#2D2B2B]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2D2B2B]"],
+html.dark [class*="text-[#2d2b2b]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2d2b2b]"],
+html.dark [class*="text-[#2F3337]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2F3337]"],
+html.dark [class*="text-[#2f3337]"],
+html[data-rishiverse-dark="true"] [class*="text-[#2f3337]"],
+html.dark [class*="text-[#32302F]"],
+html[data-rishiverse-dark="true"] [class*="text-[#32302F]"],
+html.dark [class*="text-[#32302f]"],
+html[data-rishiverse-dark="true"] [class*="text-[#32302f]"],
+html.dark [class*="text-[#3D393A]"],
+html[data-rishiverse-dark="true"] [class*="text-[#3D393A]"],
+html.dark [class*="text-[#3d393a]"],
+html[data-rishiverse-dark="true"] [class*="text-[#3d393a]"],
+html.dark [class*="text-[#475467]"],
+html[data-rishiverse-dark="true"] [class*="text-[#475467]"],
+html.dark [class*="text-[#475467]"],
+html[data-rishiverse-dark="true"] [class*="text-[#475467]"],
+html.dark [class*="text-[#5A5F66]"],
+html[data-rishiverse-dark="true"] [class*="text-[#5A5F66]"],
+html.dark [class*="text-[#5a5f66]"],
+html[data-rishiverse-dark="true"] [class*="text-[#5a5f66]"],
+html.dark [class*="text-[#605B5A]"],
+html[data-rishiverse-dark="true"] [class*="text-[#605B5A]"],
+html.dark [class*="text-[#605b5a]"],
+html[data-rishiverse-dark="true"] [class*="text-[#605b5a]"] {
+  color: #ffffff !important;
+}
+
+/* Secondary & silver text hex classes -> Bright Light Gray */
+html.dark [class*="text-[#777]"],
+html[data-rishiverse-dark="true"] [class*="text-[#777]"],
+html.dark [class*="text-[#777]"],
+html[data-rishiverse-dark="true"] [class*="text-[#777]"],
+html.dark [class*="text-[#7B7674]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7B7674]"],
+html.dark [class*="text-[#7b7674]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7b7674]"],
+html.dark [class*="text-[#7B7677]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7B7677]"],
+html.dark [class*="text-[#7b7677]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7b7677]"],
+html.dark [class*="text-[#7E7A79]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7E7A79]"],
+html.dark [class*="text-[#7e7a79]"],
+html[data-rishiverse-dark="true"] [class*="text-[#7e7a79]"],
+html.dark [class*="text-[#868C93]"],
+html[data-rishiverse-dark="true"] [class*="text-[#868C93]"],
+html.dark [class*="text-[#868c93]"],
+html[data-rishiverse-dark="true"] [class*="text-[#868c93]"],
+html.dark [class*="text-[#8A8A8A]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8A8A8A]"],
+html.dark [class*="text-[#8a8a8a]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8a8a8a]"],
+html.dark [class*="text-[#8B8B8B]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8B8B8B]"],
+html.dark [class*="text-[#8b8b8b]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8b8b8b]"],
+html.dark [class*="text-[#8D8887]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8D8887]"],
+html.dark [class*="text-[#8d8887]"],
+html[data-rishiverse-dark="true"] [class*="text-[#8d8887]"],
+html.dark [class*="text-[#9A9796]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9A9796]"],
+html.dark [class*="text-[#9a9796]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9a9796]"],
+html.dark [class*="text-[#9B9492]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9B9492]"],
+html.dark [class*="text-[#9b9492]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9b9492]"],
+html.dark [class*="text-[#9D9997]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9D9997]"],
+html.dark [class*="text-[#9d9997]"],
+html[data-rishiverse-dark="true"] [class*="text-[#9d9997]"],
+html.dark [class*="text-[#A19C99]"],
+html[data-rishiverse-dark="true"] [class*="text-[#A19C99]"],
+html.dark [class*="text-[#a19c99]"],
+html[data-rishiverse-dark="true"] [class*="text-[#a19c99]"],
+html.dark [class*="text-[#A8A3A2]"],
+html[data-rishiverse-dark="true"] [class*="text-[#A8A3A2]"],
+html.dark [class*="text-[#a8a3a2]"],
+html[data-rishiverse-dark="true"] [class*="text-[#a8a3a2]"],
+html.dark [class*="text-[#AFAAA6]"],
+html[data-rishiverse-dark="true"] [class*="text-[#AFAAA6]"],
+html.dark [class*="text-[#afaaa6]"],
+html[data-rishiverse-dark="true"] [class*="text-[#afaaa6]"],
+html.dark [class*="text-[#B1A8A8]"],
+html[data-rishiverse-dark="true"] [class*="text-[#B1A8A8]"],
+html.dark [class*="text-[#b1a8a8]"],
+html[data-rishiverse-dark="true"] [class*="text-[#b1a8a8]"],
+html.dark [class*="text-[#B7B2B0]"],
+html[data-rishiverse-dark="true"] [class*="text-[#B7B2B0]"],
+html.dark [class*="text-[#b7b2b0]"],
+html[data-rishiverse-dark="true"] [class*="text-[#b7b2b0]"],
+html.dark [class*="text-[#CCC7C5]"],
+html[data-rishiverse-dark="true"] [class*="text-[#CCC7C5]"],
+html.dark [class*="text-[#ccc7c5]"],
+html[data-rishiverse-dark="true"] [class*="text-[#ccc7c5]"],
+html.dark [class*="text-[#C4CAD1]"],
+html[data-rishiverse-dark="true"] [class*="text-[#C4CAD1]"],
+html.dark [class*="text-[#c4cad1]"],
+html[data-rishiverse-dark="true"] [class*="text-[#c4cad1]"] {
+  color: #f1f5f9 !important;
+}
+
+/* Light background hex classes -> Dark surface */
+html.dark [class*="bg-[#D9D9D9]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#D9D9D9]"],
+html.dark [class*="bg-[#d9d9d9]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#d9d9d9]"],
+html.dark [class*="bg-[#E49660]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#E49660]"],
+html.dark [class*="bg-[#e49660]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#e49660]"],
+html.dark [class*="bg-[#E5E5E5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#E5E5E5]"],
+html.dark [class*="bg-[#e5e5e5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#e5e5e5]"],
+html.dark [class*="bg-[#E8E4E2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#E8E4E2]"],
+html.dark [class*="bg-[#e8e4e2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#e8e4e2]"],
+html.dark [class*="bg-[#EAF5EC]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#EAF5EC]"],
+html.dark [class*="bg-[#eaf5ec]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#eaf5ec]"],
+html.dark [class*="bg-[#EAF8EE]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#EAF8EE]"],
+html.dark [class*="bg-[#eaf8ee]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#eaf8ee]"],
+html.dark [class*="bg-[#ECE9E6]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#ECE9E6]"],
+html.dark [class*="bg-[#ece9e6]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#ece9e6]"],
+html.dark [class*="bg-[#EDB792]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#EDB792]"],
+html.dark [class*="bg-[#edb792]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#edb792]"],
+html.dark [class*="bg-[#EFEFEF]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#EFEFEF]"],
+html.dark [class*="bg-[#efefef]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#efefef]"],
+html.dark [class*="bg-[#F1EFED]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F1EFED]"],
+html.dark [class*="bg-[#f1efed]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f1efed]"],
+html.dark [class*="bg-[#F1F1F1]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F1F1F1]"],
+html.dark [class*="bg-[#f1f1f1]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f1f1f1]"],
+html.dark [class*="bg-[#F2F0EE]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F2F0EE]"],
+html.dark [class*="bg-[#f2f0ee]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f2f0ee]"],
+html.dark [class*="bg-[#F2F2F2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F2F2F2]"],
+html.dark [class*="bg-[#f2f2f2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f2f2f2]"],
+html.dark [class*="bg-[#F2F4F7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F2F4F7]"],
+html.dark [class*="bg-[#f2f4f7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f2f4f7]"],
+html.dark [class*="bg-[#F4D0B7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F4D0B7]"],
+html.dark [class*="bg-[#f4d0b7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f4d0b7]"],
+html.dark [class*="bg-[#F4F3F2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F4F3F2]"],
+html.dark [class*="bg-[#f4f3f2]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f4f3f2]"],
+html.dark [class*="bg-[#F4F4F4]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F4F4F4]"],
+html.dark [class*="bg-[#f4f4f4]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f4f4f4]"],
+html.dark [class*="bg-[#F5F5F5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F5F5F5]"],
+html.dark [class*="bg-[#f5f5f5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f5f5f5]"],
+html.dark [class*="bg-[#F6F5F5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F6F5F5]"],
+html.dark [class*="bg-[#f6f5f5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f6f5f5]"],
+html.dark [class*="bg-[#F7F6F5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F7F6F5]"],
+html.dark [class*="bg-[#f7f6f5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f7f6f5]"],
+html.dark [class*="bg-[#F7FAFC]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F7FAFC]"],
+html.dark [class*="bg-[#f7fafc]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f7fafc]"],
+html.dark [class*="bg-[#F7FBF8]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F7FBF8]"],
+html.dark [class*="bg-[#f7fbf8]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f7fbf8]"],
+html.dark [class*="bg-[#F8DDCA]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F8DDCA]"],
+html.dark [class*="bg-[#f8ddca]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f8ddca]"],
+html.dark [class*="bg-[#F8F4E5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F8F4E5]"],
+html.dark [class*="bg-[#f8f4e5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f8f4e5]"],
+html.dark [class*="bg-[#F8F7F6]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F8F7F6]"],
+html.dark [class*="bg-[#f8f7f6]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f8f7f6]"],
+html.dark [class*="bg-[#F8F8F8]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#F8F8F8]"],
+html.dark [class*="bg-[#f8f8f8]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f8f8f8]"],
+html.dark [class*="bg-[#FAF4F1]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FAF4F1]"],
+html.dark [class*="bg-[#faf4f1]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#faf4f1]"],
+html.dark [class*="bg-[#FAF8F7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FAF8F7]"],
+html.dark [class*="bg-[#faf8f7]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#faf8f7]"],
+html.dark [class*="bg-[#FAFAFA]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FAFAFA]"],
+html.dark [class*="bg-[#fafafa]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fafafa]"],
+html.dark [class*="bg-[#FCEBDD]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FCEBDD]"],
+html.dark [class*="bg-[#fcebdd]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fcebdd]"],
+html.dark [class*="bg-[#FCEDE3]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FCEDE3]"],
+html.dark [class*="bg-[#fcede3]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fcede3]"],
+html.dark [class*="bg-[#FCEDEB]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FCEDEB]"],
+html.dark [class*="bg-[#fcedeb]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fcedeb]"],
+html.dark [class*="bg-[#FCFCFC]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FCFCFC]"],
+html.dark [class*="bg-[#fcfcfc]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fcfcfc]"],
+html.dark [class*="bg-[#FEF9F5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FEF9F5]"],
+html.dark [class*="bg-[#fef9f5]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fef9f5]"],
+html.dark [class*="bg-[#FEFDFC]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FEFDFC]"],
+html.dark [class*="bg-[#fefdfc]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fefdfc]"],
+html.dark [class*="bg-[#FFF1EB]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF1EB]"],
+html.dark [class*="bg-[#fff1eb]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff1eb]"],
+html.dark [class*="bg-[#FFF3EA]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF3EA]"],
+html.dark [class*="bg-[#fff3ea]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff3ea]"],
+html.dark [class*="bg-[#FFF4EC]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF4EC]"],
+html.dark [class*="bg-[#fff4ec]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff4ec]"],
+html.dark [class*="bg-[#FFF8F3]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#FFF8F3]"],
+html.dark [class*="bg-[#fff8f3]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#fff8f3]"],
+html.dark [class*="bg-[#f0c9ad]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f0c9ad]"],
+html.dark [class*="bg-[#f0c9ad]"],
+html[data-rishiverse-dark="true"] [class*="bg-[#f0c9ad]"] {
+  background-color: #222634 !important;
+}
+
+/* Light border hex classes -> Dark border */
+html.dark [class*="border-[#ABA8A6]"],
+html[data-rishiverse-dark="true"] [class*="border-[#ABA8A6]"],
+html.dark [class*="border-[#aba8a6]"],
+html[data-rishiverse-dark="true"] [class*="border-[#aba8a6]"],
+html.dark [class*="border-[#CBC6C3]"],
+html[data-rishiverse-dark="true"] [class*="border-[#CBC6C3]"],
+html.dark [class*="border-[#cbc6c3]"],
+html[data-rishiverse-dark="true"] [class*="border-[#cbc6c3]"],
+html.dark [class*="border-[#D7E7FF]"],
+html[data-rishiverse-dark="true"] [class*="border-[#D7E7FF]"],
+html.dark [class*="border-[#d7e7ff]"],
+html[data-rishiverse-dark="true"] [class*="border-[#d7e7ff]"],
+html.dark [class*="border-[#E49660]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E49660]"],
+html.dark [class*="border-[#e49660]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e49660]"],
+html.dark [class*="border-[#E5E0DD]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E5E0DD]"],
+html.dark [class*="border-[#e5e0dd]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e5e0dd]"],
+html.dark [class*="border-[#E5E5E5]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E5E5E5]"],
+html.dark [class*="border-[#e5e5e5]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e5e5e5]"],
+html.dark [class*="border-[#E7B28C]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E7B28C]"],
+html.dark [class*="border-[#e7b28c]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e7b28c]"],
+html.dark [class*="border-[#E7D7CB]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E7D7CB]"],
+html.dark [class*="border-[#e7d7cb]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e7d7cb]"],
+html.dark [class*="border-[#E7E2DE]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E7E2DE]"],
+html.dark [class*="border-[#e7e2de]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e7e2de]"],
+html.dark [class*="border-[#E8E2DE]"],
+html[data-rishiverse-dark="true"] [class*="border-[#E8E2DE]"],
+html.dark [class*="border-[#e8e2de]"],
+html[data-rishiverse-dark="true"] [class*="border-[#e8e2de]"],
+html.dark [class*="border-[#ECE9E6]"],
+html[data-rishiverse-dark="true"] [class*="border-[#ECE9E6]"],
+html.dark [class*="border-[#ece9e6]"],
+html[data-rishiverse-dark="true"] [class*="border-[#ece9e6]"],
+html.dark [class*="border-[#EEF4EF]"],
+html[data-rishiverse-dark="true"] [class*="border-[#EEF4EF]"],
+html.dark [class*="border-[#eef4ef]"],
+html[data-rishiverse-dark="true"] [class*="border-[#eef4ef]"],
+html.dark [class*="border-[#F1D2BC]"],
+html[data-rishiverse-dark="true"] [class*="border-[#F1D2BC]"],
+html.dark [class*="border-[#f1d2bc]"],
+html[data-rishiverse-dark="true"] [class*="border-[#f1d2bc]"],
+html.dark [class*="border-[#F2DCCD]"],
+html[data-rishiverse-dark="true"] [class*="border-[#F2DCCD]"],
+html.dark [class*="border-[#f2dccd]"],
+html[data-rishiverse-dark="true"] [class*="border-[#f2dccd]"],
+html.dark [class*="border-[#F2F0EE]"],
+html[data-rishiverse-dark="true"] [class*="border-[#F2F0EE]"],
+html.dark [class*="border-[#f2f0ee]"],
+html[data-rishiverse-dark="true"] [class*="border-[#f2f0ee]"],
+html.dark [class*="border-[#F4F4F4]"],
+html[data-rishiverse-dark="true"] [class*="border-[#F4F4F4]"],
+html.dark [class*="border-[#f4f4f4]"],
+html[data-rishiverse-dark="true"] [class*="border-[#f4f4f4]"] {
+  border-color: #2d3345 !important;
+}
+
+
+/* 6. Common Background Class Overrides */
+html.dark .bg-white,
+html[data-rishiverse-dark="true"] .bg-white {
+  background-color: var(--card) !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-neutral-50,
+html.dark .bg-slate-50,
+html.dark .bg-zinc-50,
+html[data-rishiverse-dark="true"] .bg-gray-50,
+html[data-rishiverse-dark="true"] .bg-neutral-50,
+html[data-rishiverse-dark="true"] .bg-slate-50,
+html[data-rishiverse-dark="true"] .bg-zinc-50 {
+  background-color: var(--background) !important;
+}
+
+html.dark .bg-gray-100,
+html.dark .bg-neutral-100,
+html.dark .bg-slate-100,
+html[data-rishiverse-dark="true"] .bg-gray-100,
+html[data-rishiverse-dark="true"] .bg-neutral-100,
+html[data-rishiverse-dark="true"] .bg-slate-100 {
+  background-color: var(--muted) !important;
+}
+
+html.dark .bg-gray-200,
+html.dark .bg-neutral-200,
+html[data-rishiverse-dark="true"] .bg-gray-200,
+html[data-rishiverse-dark="true"] .bg-neutral-200 {
+  background-color: #262c3a !important;
+}
+
+/* 7. Borders & Dividers */
+html.dark .border-neutral-100,
+html.dark .border-neutral-200,
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-slate-200,
+html[data-rishiverse-dark="true"] .border-neutral-100,
+html[data-rishiverse-dark="true"] .border-neutral-200,
+html[data-rishiverse-dark="true"] .border-gray-100,
+html[data-rishiverse-dark="true"] .border-gray-200,
+html[data-rishiverse-dark="true"] .border-slate-200 {
+  border-color: var(--border) !important;
+}
+
+html.dark .divide-neutral-200 > :not([hidden]) ~ :not([hidden]),
+html.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]),
+html[data-rishiverse-dark="true"] .divide-neutral-200 > :not([hidden]) ~ :not([hidden]),
+html[data-rishiverse-dark="true"] .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+  border-color: var(--border) !important;
+}
+
+/* 8. Top Navigation Bar & Sidebar */
+html.dark header,
+html.dark nav,
+html[data-rishiverse-dark="true"] header,
+html[data-rishiverse-dark="true"] nav {
+  background-color: var(--sidebar) !important;
+  border-color: var(--border) !important;
+}
+
+html.dark aside,
+html[data-rishiverse-dark="true"] aside {
+  background-color: var(--sidebar) !important;
+  border-color: var(--border) !important;
+}
+
+html.dark nav a:hover,
+html.dark aside a:hover,
+html[data-rishiverse-dark="true"] nav a:hover,
+html[data-rishiverse-dark="true"] aside a:hover {
+  background-color: var(--sidebar-accent) !important;
+  color: #ffffff !important;
+}
+
+/* 9. Cards, Dialogs & Modals */
+html.dark [role="dialog"],
+html.dark [role="menu"],
+html.dark [role="listbox"],
+html.dark [data-radix-popper-content-wrapper],
+html[data-rishiverse-dark="true"] [role="dialog"],
+html[data-rishiverse-dark="true"] [role="menu"],
+html[data-rishiverse-dark="true"] [role="listbox"],
+html[data-rishiverse-dark="true"] [data-radix-popper-content-wrapper] {
+  background-color: var(--popover) !important;
+  color: #ffffff !important;
+  border-color: var(--border) !important;
+}
+
+/* 10. Tables */
+html.dark table,
+html[data-rishiverse-dark="true"] table {
+  background-color: var(--card) !important;
+  color: #ffffff !important;
+  border-color: var(--border) !important;
+}
+
+html.dark th,
+html[data-rishiverse-dark="true"] th {
+  background-color: var(--muted) !important;
+  color: #ffffff !important;
+  border-color: var(--border) !important;
+}
+
+html.dark td,
+html[data-rishiverse-dark="true"] td {
+  color: #f1f5f9 !important;
+  border-color: var(--border) !important;
+}
+
+html.dark tr:hover,
+html[data-rishiverse-dark="true"] tr:hover {
+  background-color: var(--muted) !important;
+}
+
+/* 11. Form Inputs & Selects */
+html.dark input,
+html.dark select,
+html.dark textarea,
+html[data-rishiverse-dark="true"] input,
+html[data-rishiverse-dark="true"] select,
+html[data-rishiverse-dark="true"] textarea {
+  background-color: var(--input-100) !important;
+  color: #ffffff !important;
+  border-color: var(--border) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder,
+html[data-rishiverse-dark="true"] input::placeholder,
+html[data-rishiverse-dark="true"] textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+html.dark input:focus,
+html.dark select:focus,
+html.dark textarea:focus,
+html[data-rishiverse-dark="true"] input:focus,
+html[data-rishiverse-dark="true"] select:focus,
+html[data-rishiverse-dark="true"] textarea:focus {
+  border-color: var(--primary) !important;
+  outline-color: var(--primary) !important;
+}
+
+/* 12. SVG Icons Crisp Visibility */
+html.dark svg,
+html[data-rishiverse-dark="true"] svg {
+  color: inherit;
+}
+
+html.dark svg:not([class*="text-green"]):not([class*="text-red"]):not([class*="text-amber"]):not([class*="text-primary"]),
+html[data-rishiverse-dark="true"] svg:not([class*="text-green"]):not([class*="text-red"]):not([class*="text-amber"]):not([class*="text-primary"]) {
+  stroke: currentColor;
+}
+
+/* 13. Status Badges & Preserving Branding */
+html.dark .bg-red-50,
+html.dark .bg-red-100,
+html[data-rishiverse-dark="true"] .bg-red-50,
+html[data-rishiverse-dark="true"] .bg-red-100 {
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  color: #fca5a5 !important;
+}
+
+html.dark .bg-emerald-50,
+html.dark .bg-green-50,
+html.dark .bg-green-100,
+html[data-rishiverse-dark="true"] .bg-emerald-50,
+html[data-rishiverse-dark="true"] .bg-green-50,
+html[data-rishiverse-dark="true"] .bg-green-100 {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  color: #86efac !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-yellow-50,
+html.dark .bg-amber-100,
+html[data-rishiverse-dark="true"] .bg-amber-50,
+html[data-rishiverse-dark="true"] .bg-yellow-50,
+html[data-rishiverse-dark="true"] .bg-amber-100 {
+  background-color: rgba(245, 158, 11, 0.2) !important;
+  color: #fde047 !important;
+}
+
+html.dark .bg-blue-50,
+html.dark .bg-blue-100,
+html[data-rishiverse-dark="true"] .bg-blue-50,
+html[data-rishiverse-dark="true"] .bg-blue-100 {
+  background-color: rgba(59, 130, 246, 0.2) !important;
+  color: #93c5fd !important;
+}
+
+/* 14. Preserve Photos, Logos, and QR Codes */
+html.dark img,
+html.dark video,
+html.dark canvas,
+html[data-rishiverse-dark="true"] img,
+html[data-rishiverse-dark="true"] video,
+html[data-rishiverse-dark="true"] canvas {
+  filter: none !important;
+}
+
+html.dark [data-qr-code],
+html[data-rishiverse-dark="true"] [data-qr-code] {
+  background-color: #ffffff !important;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+/* 15. Scrollbars */
+html.dark ::-webkit-scrollbar,
+html[data-rishiverse-dark="true"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+html.dark ::-webkit-scrollbar-track,
+html[data-rishiverse-dark="true"] ::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+html.dark ::-webkit-scrollbar-thumb,
+html[data-rishiverse-dark="true"] ::-webkit-scrollbar-thumb {
+  background: #2b3243;
+  border-radius: 5px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover,
+html[data-rishiverse-dark="true"] ::-webkit-scrollbar-thumb:hover {
+  background: #3c455d;
+}
+
+/* 16. In-Page Companion Widget Host */
+#rishiverse-companion-root {
+  all: initial;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+}
+
+html[data-hide-quick-toggle="true"] #rishiverse-companion-root {
+  display: none !important;
+}
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rishiverse-Extension</title>
+  <link rel="stylesheet" href="popup.css">
+  <script src="../scripts/crypto-js.min.js"></script>
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Top Navigation Tabs (3 Tabs) -->
+    <header class="top-nav">
+      <div class="brand-row">
+        <div class="logo-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">Rishiverse</span>
+          <span class="brand-subtitle">Rishihood University</span>
+        </div>
+      </div>
+
+      <nav class="tab-pills" role="tablist">
+        <button type="button" class="tab-btn active" id="tab-btn-theme" data-tab="tab-theme" role="tab" aria-selected="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+          </svg>
+          <span>Theme</span>
+        </button>
+
+        <button type="button" class="tab-btn" id="tab-btn-menu" data-tab="tab-menu" role="tab" aria-selected="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2M15 11v11M5 2v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2M7 12v10"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+
+        <button type="button" class="tab-btn" id="tab-btn-attendance" data-tab="tab-attendance" role="tab" aria-selected="false">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <path d="m9 16 2 2 4-4"/>
+          </svg>
+          <span>Attendance</span>
+        </button>
+      </nav>
+    </header>
+
+    <!-- TAB 1: THEME PANE -->
+    <main class="tab-content active" id="tab-theme" role="tabpanel">
+      <!-- Master Switch Card -->
+      <div class="card master-switch-card">
+        <div class="switch-info">
+          <span class="switch-label">Dark Theme</span>
+          <span class="switch-status" id="status-text">Enabled</span>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="dark-toggle" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Theme Style Selector -->
+      <div class="section">
+        <label class="section-title">Dark Palette</label>
+        <div class="palette-options">
+          <button type="button" class="palette-btn active" data-style="midnight" id="btn-midnight">
+            <span class="color-dot midnight"></span>
+            <span class="palette-name">Midnight</span>
+          </button>
+          <button type="button" class="palette-btn" data-style="oled" id="btn-oled">
+            <span class="color-dot oled"></span>
+            <span class="palette-name">OLED Black</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Preferences -->
+      <div class="section preferences">
+        <label class="section-title">Preferences</label>
+
+        <label class="pref-row">
+          <span class="pref-text">In-page floating quick toggle</span>
+          <input type="checkbox" id="quick-toggle-pref" checked>
+        </label>
+
+        <label class="pref-row">
+          <span class="pref-text">Follow system theme</span>
+          <input type="checkbox" id="system-theme-pref">
+        </label>
+      </div>
+
+      <div class="shortcut-box">
+        <span class="shortcut-icon">⌨️</span>
+        <span class="shortcut-text">Press <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>D</kbd> on Rishiverse to toggle anytime</span>
+      </div>
+    </main>
+
+    <!-- TAB 2: MESS MENU PANE -->
+    <main class="tab-content" id="tab-menu" role="tabpanel">
+      <!-- Menu Sub-header -->
+      <div class="menu-header-bar">
+        <div class="menu-header-info">
+          <div class="menu-day-row">
+            <h2 id="menu-day-title" class="menu-day-title">Today</h2>
+            <span id="menu-date-badge" class="menu-date-badge">Loading...</span>
+          </div>
+          <span id="menu-sync-status" class="menu-sync-status">Weekly Menu • Refreshes Mondays</span>
+        </div>
+
+        <div class="menu-header-actions">
+          <button type="button" id="btn-goto-today" class="menu-action-btn today-btn" title="Jump to Today's Menu" style="display: none;">
+            Today
+          </button>
+          <button type="button" id="btn-refresh-menu" class="menu-action-btn refresh-btn" title="Refresh menu from GitHub">
+            <svg class="refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+              <path d="M21 21v-5h-5"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 7-Day Selector Bar -->
+      <div class="day-selector-bar" role="tablist" aria-label="Select day of the week">
+        <button type="button" class="day-chip" data-day="Monday">
+          <span class="day-name">Mon</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Tuesday">
+          <span class="day-name">Tue</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Wednesday">
+          <span class="day-name">Wed</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Thursday">
+          <span class="day-name">Thu</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Friday">
+          <span class="day-name">Fri</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Saturday">
+          <span class="day-name">Sat</span>
+          <span class="today-dot"></span>
+        </button>
+        <button type="button" class="day-chip" data-day="Sunday">
+          <span class="day-name">Sun</span>
+          <span class="today-dot"></span>
+        </button>
+      </div>
+
+      <!-- Meals Container -->
+      <div id="meals-container" class="meals-container">
+        <div class="menu-loading-skeleton">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- TAB 3: LMS ATTENDANCE PANE -->
+    <main class="tab-content" id="tab-attendance" role="tabpanel">
+      <!-- Attendance Sub-header -->
+      <div class="att-header-bar">
+        <div class="att-header-info">
+          <div class="att-title-row">
+            <h2 class="att-title">LMS Attendance</h2>
+            <span id="att-overall-badge" class="att-overall-badge">--%</span>
+          </div>
+          <span id="att-sync-status" class="att-sync-status">Last Synced: Never</span>
+        </div>
+
+        <div class="att-header-actions">
+          <button type="button" id="btn-sync-attendance" class="att-action-btn sync-btn" title="Sync attendance from Rishiverse">
+            <svg class="refresh-icon" id="att-refresh-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+              <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/>
+              <path d="M21 21v-5h-5"/>
+            </svg>
+            <span>Sync</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Target Attendance Selector -->
+      <div class="att-target-selector">
+        <span class="att-target-label">Target:</span>
+        <div class="att-target-pills" role="radiogroup" aria-label="Attendance Target">
+          <button type="button" class="att-target-pill active" data-target="0.75">75%</button>
+          <button type="button" class="att-target-pill" data-target="0.80">80%</button>
+          <button type="button" class="att-target-pill" data-target="0.85">85%</button>
+          <button type="button" class="att-target-pill" data-target="0.90">90%</button>
+        </div>
+      </div>
+
+      <!-- Overall Summary Card -->
+      <div id="att-overall-card" class="card att-overall-card" style="display: none;">
+        <div class="att-overall-ring-wrap">
+          <div class="att-progress-circle-wrap">
+            <svg class="att-progress-ring" viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="28" class="ring-bg"></circle>
+              <circle cx="32" cy="32" r="28" class="ring-fill" id="overall-ring-fill"></circle>
+            </svg>
+            <div class="ring-center-text">
+              <span id="overall-pct-text" class="ring-pct">--%</span>
+            </div>
+          </div>
+        </div>
+        <div class="att-overall-details">
+          <div class="overall-stat-line">
+            <span class="stat-label">Total Classes:</span>
+            <span id="overall-classes-text" class="stat-value">-- / --</span>
+          </div>
+          <div class="overall-status-pill" id="overall-status-pill">
+            Calculating...
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Cards Container -->
+      <div id="att-courses-container" class="att-courses-container">
+        <div class="att-empty-state">
+          <p>Click <strong>Sync</strong> while logged into Rishiverse to load your LMS Attendance.</p>
+          <a href="https://rishiverse.rishihood.edu.in/lms/attendance" target="_blank" class="att-open-link">
+            Open LMS Attendance ↗
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="footer">
+      <div class="url-badge">
+        <span class="live-dot"></span> rishiverse.rishihood.edu.in
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

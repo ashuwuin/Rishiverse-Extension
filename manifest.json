@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "Rishiverse-Extension",
+  "version": "1.2.1",
+  "description": "Dark Theme, Campus Mess Menu & Live LMS Attendance Tracker for Rishiverse ERP (Rishihood University).",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://rishiverse.rishihood.edu.in/*",
+    "https://api.rishiverse.rishihood.edu.in/*",
+    "*://*.rishihood.edu.in/*",
+    "https://raw.githubusercontent.com/*"
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    },
+    "default_title": "Rishiverse-Extension"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://rishiverse.rishihood.edu.in/*"
+      ],
+      "css": [
+        "styles/dark-theme.css"
+      ],
+      "js": [
+        "scripts/crypto-js.min.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "menu.json"
+      ],
+      "matches": [
+        "https://rishiverse.rishihood.edu.in/*"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-dark-mode": {
+      "suggested_key": {
+        "default": "Alt+Shift+D",
+        "mac": "Alt+Shift+D"
+      },
+      "description": "Toggle Rishiverse Dark Mode"
+    }
+  }
+}
